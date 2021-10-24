@@ -8,11 +8,11 @@ import Title from '../dashboard/Title';
 const ChannelBanner = ({ description, name, logoUrl }) => (
   <ChannelBannerWrapper>
     <Title>Channel Information</Title>
-    <div style={{ display: 'flex', padding: '8px' }}>
+    <div style={{ display: 'flex', padding: '8px', flexWrap: 'wrap' }}>
       <div style={{ padding: '8px' }}>
         <img height="140px" src={logoUrl} alt="Channel Logo" />
       </div>
-      <div style={{ padding: '8px' }}>
+      <div style={{ padding: '8px', width: '80%' }}>
         <div>
           <Title variant="h3">{name}</Title>
         </div>

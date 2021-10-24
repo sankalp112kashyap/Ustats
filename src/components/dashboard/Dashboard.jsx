@@ -31,6 +31,7 @@ import { ChannelsTable } from '../channels-table';
 import ChannelInfoCard from './Deposits';
 import Title from './Title';
 import { getCountryName } from '../../util/countryName';
+import Footer from '../footer/footer';
 
 const drawerWidth = 300;
 
@@ -93,10 +94,11 @@ const Navigation = ({ setNumber, mode, setMode, setOrder, setCountry, country, o
 
   return (
     <>
-      <AppBar color="primary" position="absolute" open={open}>
+      <AppBar color="default" position="absolute" open={open}>
         <Toolbar
           sx={{
             pr: '24px', // keep right padding when drawer closed
+            height: '80px',
           }}
         >
           <IconButton
@@ -112,7 +114,7 @@ const Navigation = ({ setNumber, mode, setMode, setOrder, setCountry, country, o
             <MenuIcon />
           </IconButton>
           <Typography component="h1" variant="h6" color="inherit" noWrap sx={{ flexGrow: 1 }}>
-            Youtube Stats
+            <img height="80px" src="/logo.png" alt="logo" />
           </Typography>
           <IconButton sx={{ ml: 1 }} onClick={toggleMode} color="inherit">
             {mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
@@ -126,6 +128,7 @@ const Navigation = ({ setNumber, mode, setMode, setOrder, setCountry, country, o
             alignItems: 'center',
             justifyContent: 'flex-end',
             px: [1],
+            height: '80px',
           }}
         >
           <IconButton onClick={toggleDrawer}>
@@ -139,61 +142,61 @@ const Navigation = ({ setNumber, mode, setMode, setOrder, setCountry, country, o
               button
               onClick={() => {
                 setNumber(10);
-                history.push('/');
+                history.push('/youtube-channels-most-subscribers');
               }}
             >
               <ListItemIcon>
                 <strong>10</strong>
               </ListItemIcon>
-              <ListItemText primary="Top 10" />
+              <ListItemText primary="Top 10 Youtube Channels" />
             </ListItem>
             <ListItem
               button
               onClick={() => {
                 setNumber(25);
-                history.push('/');
+                history.push('/youtube-channels-most-subscribers');
               }}
             >
               <ListItemIcon>
                 <strong>25</strong>
               </ListItemIcon>
-              <ListItemText primary="Top 25" />
+              <ListItemText primary="Top 25 Youtube Channels" />
             </ListItem>
             <ListItem
               button
               onClick={() => {
                 setNumber(50);
-                history.push('/');
+                history.push('/youtube-channels-most-subscribers');
               }}
             >
               <ListItemIcon>
                 <strong>50</strong>
               </ListItemIcon>
-              <ListItemText primary="Top 50" />
+              <ListItemText primary="Top 50 Youtube Channels" />
             </ListItem>
             <ListItem
               button
               onClick={() => {
                 setNumber(50);
-                history.push('/');
+                history.push('/youtube-channels-most-subscribers');
               }}
             >
               <ListItemIcon>
                 <strong>100</strong>
               </ListItemIcon>
-              <ListItemText primary="Top 100" />
+              <ListItemText primary="Top 100 Youtube Channels" />
             </ListItem>
             <ListItem
               button
               onClick={() => {
                 setNumber(50);
-                history.push('/');
+                history.push('/youtube-channels-most-subscribers');
               }}
             >
               <ListItemIcon>
                 <strong>250</strong>
               </ListItemIcon>
-              <ListItemText primary="Top 250" />
+              <ListItemText primary="Top 250 Youtube Channels" />
             </ListItem>
           </div>
         </List>
@@ -226,23 +229,9 @@ const Navigation = ({ setNumber, mode, setMode, setOrder, setCountry, country, o
                 </Select>
               </FormControl>
             </ListItem>
-            {/* <ListItem button>
-              <ListItemIcon>
-                <PublicIcon />
-              </ListItemIcon>
-              <FormControl fullWidth>
-                <Autocomplete
-                  options={countries}
-                  value={country}
-                  onChange={(event, value) => {
-                    setCountry(value.id);
-                  }}
-                  renderInput={(params) => <TextField {...params} label="Country" />}
-                />
-              </FormControl>
-            </ListItem> */}
           </div>
         </List>
+        {open && <div style={{ height: '256px', backgroundColor: 'grey', margin: '16px' }}></div>}
       </Drawer>
     </>
   );
@@ -259,6 +248,7 @@ function DashboardContent({
 }) {
   return (
     <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+      <div style={{ height: '150px', backgroundColor: 'grey', margin: '16px' }}></div>
       <Grid container spacing={3}>
         <Grid item xs={12} md={8} lg={9}>
           <Paper
@@ -326,6 +316,7 @@ function DashboardContent({
           </Paper>
         </Grid>
       </Grid>
+      <div style={{ height: '150px', backgroundColor: 'grey', margin: '16px' }}></div>
     </Container>
   );
 }
@@ -337,20 +328,48 @@ export default function Dashboard(props) {
   const [order, setOrder] = React.useState('videoCount');
   const [country, setCountry] = React.useState('IN');
   const mdTheme = createTheme({
+    typography: {
+      fontFamily: ['Poppins'].join(','),
+      h1: {
+        fontFamily: ['Recursive'].join(','),
+      },
+      h2: {
+        fontFamily: ['Recursive'].join(','),
+      },
+      h3: {
+        fontFamily: ['Recursive'].join(','),
+      },
+      h4: {
+        fontFamily: ['Recursive'].join(','),
+      },
+      h5: {
+        fontFamily: ['Recursive'].join(','),
+      },
+      h6: {
+        fontFamily: ['Recursive'].join(','),
+      },
+    },
     palette: {
       mode,
       ...(mode === 'light'
         ? {
             // palette values for light mode
-            primary: red,
+            primary: {
+              light: '#fff',
+              main: '#0385DB',
+              secondary: '#0fe9D00',
+            },
             text: {
               primary: grey[900],
               secondary: grey[800],
             },
+            typography: {
+              fontFamily: ['Poppins, sans-serif'],
+            },
           }
         : {
             // palette values for dark mode
-            primary: deepOrange,
+            primary: { main: '#Fe9d00' },
             divider: deepOrange[200],
             background: {
               default: grey[800],
@@ -368,7 +387,7 @@ export default function Dashboard(props) {
     <>
       <Router>
         <ThemeProvider theme={mdTheme}>
-          <Box sx={{ display: 'flex' }}>
+          <Box sx={{ display: 'flex', overflowX: 'hidden' }}>
             <CssBaseline />
             <Navigation
               setNumber={setNumber}
@@ -380,32 +399,45 @@ export default function Dashboard(props) {
               country={country}
             />
             <Box
-              component="main"
-              sx={{
-                backgroundColor: (theme) =>
-                  theme.palette.mode === 'light'
-                    ? theme.palette.grey[100]
-                    : theme.palette.grey[900],
-                flexGrow: 1,
-                height: '100vh',
-                overflow: 'auto',
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                minHeight: '100vh',
+                width: '100%',
               }}
             >
-              <Toolbar />
+              <Box
+                component="main"
+                sx={{
+                  backgroundColor: (theme) =>
+                    theme.palette.mode === 'light'
+                      ? theme.palette.grey[100]
+                      : theme.palette.grey[900],
+                  flexGrow: 1,
+                  height: '100vh',
+                  overflow: 'auto',
+                }}
+              >
+                <Toolbar />
 
-              <Switch>
-                <Route exact path="/">
-                  <ChannelsTable
-                    order={order}
-                    country={country}
-                    setChannelName={setChannelName}
-                    numberOfChannels={number}
-                  />
-                </Route>
-                <Route exact path="/channel">
-                  {channelName && <DashboardContent {...channelName} />}
-                </Route>
-              </Switch>
+                <Switch>
+                  <Route exact path="/youtube-channels-most-subscribers/">
+                    <ChannelsTable
+                      order={order}
+                      country={country}
+                      setChannelName={setChannelName}
+                      numberOfChannels={number}
+                    />
+                  </Route>
+                  <Route
+                    exact
+                    path="/youtube-channels-most-subscribers/youtube-channel/:channelName"
+                  >
+                    {channelName && <DashboardContent {...channelName} />}
+                  </Route>
+                </Switch>
+              </Box>
+              <Footer />
             </Box>
           </Box>
         </ThemeProvider>
